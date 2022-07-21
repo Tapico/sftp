@@ -66,15 +66,15 @@ if [ ! -f "$userConfFinalPath" ]; then
 
     # Generate unique ssh keys for this container, if needed
     if [ ! -f /etc/ssh/ssh_host_ed25519_key ]; then
-        ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
+        ssh-keygen -t ed25519 -f /etc/ssh.d/ssh_host_ed25519_key -N ''
     fi
     if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
-        ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N ''
+        ssh-keygen -t rsa -b 4096 -f /etc/ssh.d/ssh_host_rsa_key -N ''
     fi
 
     # Restrict access from other users
-    chmod 600 /etc/ssh/ssh_host_ed25519_key || true
-    chmod 600 /etc/ssh/ssh_host_rsa_key || true
+    chmod 600 /etc/ssh.d/ssh_host_ed25519_key || true
+    chmod 600 /etc/ssh.d/ssh_host_rsa_key || true
 fi
 
 # Source custom scripts, if any
