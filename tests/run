@@ -10,7 +10,7 @@ tmpDir="$(mktemp -d /tmp/atmoz_sftp_XXXX)"
 sshKeyPri="$tmpDir/rsa"
 sshKeyPub="$tmpDir/rsa.pub"
 sshHostEd25519Key="$tmpDir/ssh_host_ed25519_key"
-sshHostKeyMountArg="--volume=$sshHostEd25519Key:/etc/ssh/ssh_host_ed25519_key"
+sshHostKeyMountArg="--volume=$sshHostEd25519Key:/etc/ssh.d/ssh_host_ed25519_key"
 sshKnownHosts="$tmpDir/known_hosts"
 
 if [ $UID != 0 ] && ! groups | grep -qw docker; then
