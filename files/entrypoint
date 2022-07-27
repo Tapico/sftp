@@ -9,6 +9,7 @@ reArgSkip='^([[:blank:]]*#.*|[[:blank:]]*)$' # comment or empty line
 
 # Paths
 userConfPath="/etc/sftp/users.conf"
+userConfTmpPath="/etc/sftp/users-tmp.conf"
 userConfPathLegacy="/etc/sftp-users.conf"
 userConfFinalPath="/var/run/sftp/users.conf"
 
@@ -33,7 +34,9 @@ fi
 if [ ! -f "$userConfFinalPath" ]; then
     mkdir -p "$(dirname $userConfFinalPath)"
 
-    if [ -f "$userConfPath" ]; then
+    if [ -f "$userConfTmpPath" ]; then
+        # Replace the variables in the temp file
+        envsubst < $userConfTmpPath > $userConfPath
         # Append mounted config to final config
         grep -v -E "$reArgSkip" < "$userConfPath" > "$userConfFinalPath"
     fi
